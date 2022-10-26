@@ -6,7 +6,7 @@
 
 const images = ["/img/01.jpg", "/img/02.jpg", "/img/03.jpg", "/img/04.jpg", "/img/05.jpg"];
 
-const itemImg = document.querySelector(".items");
+const itemImg = document.querySelector(".items");// Seleziono l'elemento in cui fare il ciclo "for"
 
 for (let i = 0; i < images.length; i++) {
     const item = document.createElement("div");  // Creo un elemento "div"
@@ -19,3 +19,14 @@ for (let i = 0; i < images.length; i++) {
     item.append(img);                            // Inserisco la mia immagine
     itemImg.append(item);                        // Inserisco il mio elemento item
 }
+
+// MILESTONE 3
+// Al click dell'utente sulle frecce, il programma cambierà l’immagine attiva, che quindi verrà visualizzata al posto della precedente.
+
+const nextSlide = document.querySelector(".up"); // Seleziono il bottone per far scorrere le "img"
+
+let active = 0;
+
+nextSlide.addEventListener(`click`, function (){
+    nextSlide.classList.add(`active`);
+}) 

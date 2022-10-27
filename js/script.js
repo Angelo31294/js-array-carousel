@@ -6,27 +6,59 @@
 
 const images = ["/img/01.jpg", "/img/02.jpg", "/img/03.jpg", "/img/04.jpg", "/img/05.jpg"];
 
-const itemImg = document.querySelector(".items");// Seleziono l'elemento in cui fare il ciclo "for"
+// Seleziono l'elemento in cui fare il ciclo "for"
+const itemImg = document.querySelector(".items");
 
+//Ciclo sull'array delle immagini
 for (let i = 0; i < images.length; i++) {
-    const item = document.createElement("div");  // Creo un elemento "div"
-    item.classList.add("item");                  // Aggiungo la classe "item" al mio elemento "div"
-    if( i === 0 ) {                              // SE il mio elemento ha valore = 0 ALLORA gli aggiungo la classe ("active")
-        item.classList.add("active");
-    }
-    const img = document.createElement("img");   // Creo un elemento "img"
-    img.setAttribute("src", images[i]);          // Aggiungo all' "src" il link dell'immagine
-    item.append(img);                            // Inserisco la mia immagine
-    itemImg.append(item);                        // Inserisco il mio elemento item
+    const srcImg = images[i];
+
+    // Creo l'item che dovrò inserire nella pagina
+    const item =
+    `
+     <div class="item active">
+                <img src="${srcImg}" alt="">
+            </div>
+    `;
+
+    // Vado ad inserire l'item nel HTML
+    itemImg.innerHTML = itemImg.innerHTML + itemImg;
 }
+
+// Seleziono il primo elemento "item" e gli aggiungo la classe "active"
+document.querySelector("item").classList.add("active");
 
 // MILESTONE 3
 // Al click dell'utente sulle frecce, il programma cambierà l’immagine attiva, che quindi verrà visualizzata al posto della precedente.
 
-const nextSlide = document.querySelector(".up"); // Seleziono il bottone per far scorrere le "img"
+//stato dello slider
+let currentImageIndex = 0;
+// Seleziono il bottone ".down" per far scorrere le immagini
+const nextBtn = document.querySelector(".down"); 
+const items = document.querySelector(".item");
 
-let active = 0;
+// Aggiungo l'evento click al pulsante
+nextBtn.addEventListener(`click`, function (){ 
+    items[currentImageIndex].classList.remove("active");
+    if ( currentImageIndex === images.length -1 ){
+        currentImageIndex = 0;
+    } else {
+        currentImageIndex++;
+    }
+    items[currentImageIndex].classList.add("active");
 
-nextSlide.addEventListener(`click`, function (){
-    nextSlide.classList.add(`active`);
-}) 
+});
+
+// Seleziono il bottone ".up" per far scorrere le immagini
+const prevBtn = document.querySelector(".up");
+
+// Aggiungo l'evento click al pulsante
+prevBtn.addEventListener(`click`, function (){
+    items[currentImageIndex].classList.remove("active");
+    if ( currentImageIndex === images.length -1 ){
+        currentImageIndex = 0;
+    } else {
+        currentImageIndex--;
+    }
+    items[currentImageIndex].classList.add("active");
+});
